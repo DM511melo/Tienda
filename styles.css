@@ -1,0 +1,1043 @@
+:root {
+    --bg-primary: #f9f9f9;
+    --bg-secondary: #ffffff;
+    --text-primary: #030303;
+    --text-secondary: #606060;
+    --border-color: #d3d3d3;
+    --copy-btn-bg: #cc0000;
+    --copy-btn-hover: #b30000;
+    --gift-card-gradient: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+}
+
+[data-theme='dark'] {
+    --bg-primary: #181818;
+    --bg-secondary: #121212;
+    --text-primary: #ffffff;
+    --text-secondary: #aaaaaa;
+    --border-color: #333333;
+    --copy-btn-bg: #cc0000;
+    --copy-btn-hover: #ff0000;
+    --gift-card-gradient: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.youtube-logo {
+    width: 90px;
+    margin-right: 15px;
+    transition: transform 0.3s ease;
+}
+
+.youtube-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-points-btn {
+    display: flex;
+    align-items: center;
+    background-color: var(--text-secondary);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-points-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.about-points-btn .tooltip-text {
+    position: absolute;
+    left: 100%;
+    white-space: nowrap;
+    background-color: var(--text-secondary);
+    color: var(--bg-primary);
+    padding: 5px 10px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s, left 0.3s;
+    pointer-events: none;
+}
+
+.about-points-btn:hover .tooltip-text {
+    left: calc(100% + 10px);
+    opacity: 1;
+}
+
+.about-points-btn:hover {
+    background-color: var(--text-primary);
+}
+
+.youtube-theme-toggle {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.youtube-theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    color: var(--text-secondary);
+}
+
+.youtube-theme-toggle .youtube-theme-text {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.youtube-theme-toggle:hover {
+    background-color: rgba(96, 96, 96, 0.1);
+}
+
+.youtube-theme-toggle:hover svg,
+.youtube-theme-toggle:hover .youtube-theme-text {
+    color: var(--text-primary);
+}
+
+.youtube-theme-toggle .tooltip-text {
+    display: none;
+}
+
+.rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.reward-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 
+        0 10px 20px rgba(0,0,0,0.1), 
+        0 6px 6px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.reward-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: var(--gift-card-gradient);
+    transform: rotate(45deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.reward-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        transparent 0%, 
+        rgba(255,255,255,0.2) 50%, 
+        transparent 100%
+    );
+    transform: skewX(-45deg);
+    transition: left 0.5s ease-in-out;
+    z-index: 3;
+}
+
+.reward-card:hover::after {
+    left: 100%;
+}
+
+.reward-card:hover {
+    transform: scale(1.05) translateY(-10px);
+    box-shadow: 
+        0 15px 30px rgba(0,0,0,0.15), 
+        0 10px 10px rgba(0,0,0,0.1),
+        0 0 20px rgba(255,215,0,0.3);
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.reward-card h2 {
+    color: #FFD700;
+    transition: color 0.3s;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(
+        to right, 
+        var(--text-primary) 0%, 
+        #FFD700 50%, 
+        var(--text-primary) 100%
+    );
+    background-size: 1000px 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: shimmer 3s infinite linear;
+}
+
+[data-theme='light'] .reward-card h2 {
+    color: #B8860B;
+    background: linear-gradient(
+        to right, 
+        #B8860B 0%, 
+        #FFD700 50%, 
+        #B8860B 100%
+    );
+    background-size: 1000px 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: shimmer 3s infinite linear;
+}
+
+.copy-btn {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+    position: relative;
+    z-index: 2;
+}
+
+.copy-btn:hover {
+    background-color: #45a049; 
+    transform: scale(1.05);
+}
+
+.copy-btn.copied {
+    background-color: #4A4A4A; 
+}
+
+.reward-card p {
+    position: relative;
+    z-index: 2;
+    font-weight: bold;
+    color: var(--text-secondary);
+}
+
+.video-preview {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch-input {
+    display: none;
+}
+
+.theme-switch-label {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: var(--text-secondary);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.theme-switch-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 2px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.theme-switch-input:checked + .theme-switch-label {
+    background-color: #4CAF50;
+}
+
+.theme-switch-input:checked + .theme-switch-label .theme-switch-slider {
+    transform: translateX(20px);
+    background-color: white;
+}
+
+.youtube-theme-switch,
+.youtube-theme-label,
+.youtube-theme-slider {
+    display: none;
+}
+
+.gift-card-banner {
+    background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0.1) 100%);
+    border: 2px solid rgba(255,215,0,0.3);
+    border-radius: 12px;
+    margin-bottom: 30px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+.gift-card-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        rgba(255,255,255,0.1) 0%, 
+        rgba(255,255,255,0) 50%, 
+        rgba(255,255,255,0.1) 100%);
+    transform: rotate(45deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.gift-card-content {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+}
+
+.gift-icon {
+    width: 60px;
+    height: 60px;
+    color: #FFD700;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.gift-card-text {
+    flex-grow: 1;
+}
+
+.gift-card-text h2 {
+    color: var(--text-primary);
+    margin-bottom: 5px;
+    font-size: 1.4em;
+}
+
+.gift-card-text p {
+    color: var(--text-secondary);
+}
+
+[data-theme='dark'] .gift-card-banner {
+    background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0.05) 100%);
+    border-color: rgba(255,215,0,0.2);
+}
+
+.points-modal-banner {
+    background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0.1) 100%);
+    border: 2px solid rgba(255,215,0,0.3);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+.points-modal-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        rgba(255,255,255,0.1) 0%, 
+        rgba(255,255,255,0) 50%, 
+        rgba(255,255,255,0.1) 100%);
+    transform: rotate(45deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.points-modal-content {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+}
+
+.points-icon {
+    width: 60px;
+    height: 60px;
+    color: #FFD700;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.points-modal-text {
+    flex-grow: 1;
+}
+
+.points-modal-text h2 {
+    color: var(--text-primary);
+    margin-bottom: 5px;
+    font-size: 1.4em;
+}
+
+.points-modal-text p {
+    color: var(--text-secondary);
+}
+
+.points-modal-details {
+    padding: 20px;
+}
+
+[data-theme='dark'] .points-modal-banner {
+    background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0.05) 100%);
+    border-color: rgba(255,215,0,0.2);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--bg-secondary);
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    color: var(--text-primary);
+}
+
+.close-modal {
+    color: var(--text-secondary);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: var(--text-primary);
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #FFD700;
+}
+
+.modal-content h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #FFD700;
+}
+
+.modal-content ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.modal-content .points-modal-details h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #FFD700;
+}
+
+.modal-content .points-modal-details ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.upcoming-rewards-banner {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.upcoming-rewards-text {
+    color: #FF0000;  
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+[data-theme='light'] .upcoming-rewards-text {
+    color: #B22222;  
+}
+
+.user-list-modal .modal-content {
+    max-width: 700px;
+}
+
+.user-list-container {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#userPixelsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#userPixelsTable thead {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-secondary);
+    z-index: 10;
+}
+
+#userPixelsTable th, #userPixelsTable td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    text-align: left;
+}
+
+#userPixelsTable th {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+#userPixelsTable tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.05);
+}
+
+#userPixelsTable img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-search-container {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+#user-search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#user-search-input:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.stream-status-banner {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    text-align: right;
+    margin-bottom: 10px;
+    box-shadow: none;
+}
+
+.stream-status-banner h2 {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+#estadoStream {
+    opacity: 0.7;
+}
+
+[data-theme='dark'] .stream-status-banner h2 {
+    color: var(--text-secondary);
+}
+
+.stream-status {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+    opacity: 0.7;
+}
+
+.stream-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+.stream-status-dot--live {
+    background-color: #FF0000;
+    animation: pulse 1.5s infinite;
+}
+
+.stream-status-dot--offline {
+    background-color: #606060;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.stream-status-text {
+    font-size: 0.8em;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 10px #FF0000, 0 0 20px #FFA500, 0 0 30px #FF4500;
+    }
+    50% {
+        box-shadow: 0 0 15px #FF0000, 0 0 30px #FFA500, 0 0 45px #FF4500;
+    }
+}
+
+/* Animación de brillo rojo para el último premio */
+.reward-card.last-prize {
+    animation: glow 2s infinite alternate;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .logo-container {
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-container svg.youtube-logo {
+    width: 40px;  
+    height: 40px;
+    margin-right: 10px;  
+  }
+
+  .logo-container h1 {
+    font-size: 1.4em;  
+    margin-right: 10px;  
+  }
+
+  .logo-container small {
+    font-size: 0.6em;  
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .rewards-grid {
+    grid-template-columns: 1fr; 
+    gap: 15px;
+  }
+
+  .reward-card {
+    padding: 15px;
+  }
+
+  .video-preview iframe {
+    height: 180px;
+  }
+
+  .modal-content {
+    width: 90%;
+    margin: 15% auto;
+    padding: 20px;
+  }
+
+  .points-modal-banner, .gift-card-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .points-icon, .gift-icon {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .points-modal-content, .gift-card-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .points-modal-text, .gift-card-text {
+    text-align: center;
+  }
+
+  .upcoming-rewards-banner {
+    margin-top: 20px;
+  }
+
+  .upcoming-rewards-text {
+    font-size: 0.9em;
+    padding: 8px 15px;
+  }
+
+  .theme-switch-label {
+    width: 35px;
+    height: 18px;
+  }
+
+  .theme-switch-slider {
+    width: 14px;
+    height: 14px;
+  }
+
+  .theme-switch-input:checked + .theme-switch-label .theme-switch-slider {
+    transform: translateX(17px);
+  }
+
+  .youtube-theme-toggle {
+    padding: 6px;
+  }
+
+  .youtube-theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+  }
+
+  .youtube-theme-toggle .youtube-theme-text {
+    font-size: 0.8em;
+  }
+
+  .user-list-modal .modal-content {
+    width: 95%;
+    margin: 10% auto;
+    padding: 15px;
+  }
+
+  #userPixelsTable {
+    font-size: 0.9em;
+  }
+
+  #userPixelsTable th, #userPixelsTable td {
+    padding: 8px;
+  }
+
+  #user-search-input {
+    font-size: 0.9em;
+    padding: 8px;
+  }
+
+  .stream-status-banner {
+    text-align: right;
+    padding: 5px 0;
+  }
+
+  .stream-status-banner h2 {
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logo-container {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .logo-container svg.youtube-logo {
+    width: 35px;
+    height: 35px;
+  }
+
+  .logo-container h1 {
+    font-size: 1.2em;
+    margin-right: 5px;
+  }
+}
+
+/* Ensure proper scaling for small screens */
+html {
+  font-size: 16px;
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .logo-container svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.youtube-live-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-secondary);
+    border: 2px solid #FF0000;
+    border-radius: 50px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #FF0000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: 
+        transform 0.3s ease, 
+        background-color 0.3s ease, 
+        color 0.3s ease;
+    z-index: 1000;
+}
+
+.youtube-live-btn svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.youtube-live-btn:hover {
+    transform: scale(1.1) translateY(-5px);
+    background-color: #FF0000;
+    color: white;
+}
+
+.youtube-live-btn:hover svg {
+    transform: scale(1.2) rotate(15deg);
+}
+
+@media screen and (max-width: 768px) {
+    .youtube-live-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 8px 12px;
+    }
+
+    .youtube-live-btn svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+    }
+}
+
+.youtube-menu-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.youtube-menu-btn svg {
+    width: 24px;
+    height: 24px;
+    color: var(--text-secondary);
+}
+
+.youtube-menu-btn:hover {
+    background-color: rgba(96, 96, 96, 0.1);
+}
+
+.youtube-menu-btn:hover svg {
+    color: var(--text-primary);
+}
+
+.youtube-menu-dropdown {
+    display: none;
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 250px;
+    z-index: 1000;
+    border: 1px solid var(--border-color);
+}
+
+.youtube-menu-content {
+    padding: 10px;
+}
+
+.youtube-menu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.youtube-menu-item {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.youtube-menu-item svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    color: var(--text-secondary);
+}
+
+.youtube-menu-item .menu-label {
+    color: var(--text-primary);
+}
+
+.youtube-menu-item:hover {
+    background-color: rgba(96, 96, 96, 0.1);
+}
+
+.youtube-menu-item:hover svg,
+.youtube-menu-item:hover .menu-label {
+    color: var(--text-primary);
+}
+
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle-container .menu-label {
+    margin-left: 15px;
+    color: var(--text-primary);
+}
+
+.theme-toggle-container:hover {
+    background-color: rgba(96, 96, 96, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+    .youtube-menu-dropdown {
+        width: calc(100% - 40px);
+        right: 20px;
+        top: 70px;
+    }
+}
+
+.youtube-header-logo {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    transition: transform 0.3s ease;
+}
+
+.youtube-header-logo svg {
+    width: 40px;
+    height: 40px;
+}
+
+.youtube-header-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+@media screen and (max-width: 768px) {
+    .youtube-header-logo svg {
+        width: 30px;
+        height: 30px;
+    }
+}
